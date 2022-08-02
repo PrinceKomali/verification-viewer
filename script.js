@@ -162,7 +162,7 @@ async function main(game) {
     })();
     for(let i of runs) {
         document.querySelector(".container_inner").innerHTML += `<div class="run" style="visibility:hidden;color:${
-            i.condition == "duplicate" ? "#fd6" : i.condition == "obsolete" ? "#f77" : "#fff"
+            i.condition == "duplicate" ? "#f66" : i.condition == "obsolete" ? "#ff6" : "#fff"
         }">${
             i.category.il ? "[IL] " : ''
         }${
@@ -183,11 +183,11 @@ async function main(game) {
     let has_dupes = runs.map(x=>x.condition).includes("duplicate");
     let has_obsoletes = runs.map(x=>x.condition).includes("obsolete");
     document.querySelector(".container_header").innerHTML = `${
-        has_obsoletes ? "<span style='color:#f77'>Obsoletes</span>" : ''
+        has_obsoletes ? "<span style='color:#ff6'>Obsoletes</span>" : ''
     }${
         has_obsoletes && has_dupes ? ", " : ""
     }${
-        has_dupes ? "<span style='color:#fd6'>Duplicates</span>" : ''
+        has_dupes ? "<span style='color:#f66'>Duplicates</span>" : ''
     }`
     let run_elements = document.querySelectorAll(".run");
     let i = 0;
