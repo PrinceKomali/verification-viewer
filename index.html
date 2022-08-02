@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<head>
+    <style>
+        .container, .header {
+            display: block;
+            border: 1px #fff solid;
+            padding: 10px;
+            margin: 10px;
+            background-color: #000a;
+        }
+        .container {
+            min-height: calc(100vh - 42px);   
+        }
+        .container_header {
+            margin-bottom: 10px;
+        }
+        body {
+            background-color: #222;
+            color: #fff;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+        .name {
+            font-weight: bold;
+        }
+        .bg {
+            min-height: 100%;
+            min-width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            opacity: 1;
+        }
+        .time {
+            color: #ddf;
+            text-decoration: none;
+        }
+        .log {
+            font-family: 'Courier New', Courier, monospace;
+            font-weight: bold;
+            font-size: .8em;
+        }
+        .fadein {
+            animation: normal fadein 1s linear;
+        }
+        .run_fadein {
+            animation: normal run_fadein 0.25s linear;
+        }
+        .fadeout {
+            animation: normal fadein 1s linear;
+        }
+        @keyframes fadein {
+            0% { opacity: 0; }
+            50% { opacity: 0; }
+            100% { opacity: 100%; }
+        }
+        @keyframes run_fadein {
+            0% { 
+                opacity: 50%; 
+            }
+            100% { 
+                opacity: 100%; 
+            }
+        }
+        @keyframes fadeout {
+            0% { 
+                opacity: 100%; 
+            }
+            100% { 
+                opacity: 0%; 
+            }
+        }
+    </style>
+</head> 
+<body>
+    <img class="bg" src=""></div>
+    <div class="header">
+        <input type="text" placeholder="botw" onkeydown="enter(this)"/> Enter your game id (for example <span style="color: #aaf">speedrun.com/</span><span style="color:#fc6">botw</span>)<br>
+        <button onclick="enter()">Go!</button> <span class="log"></span>
+    </div>
+    <div class="container">
+        <div class="container_header"></div>
+        <div class="container_inner"></div>
+    </div>
+    <script src="script.js"></script>
+</body>
