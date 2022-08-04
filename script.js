@@ -99,7 +99,7 @@ async function parse_runs(game) {
         },
         date: new Date(r.submitted),
         runners: r.players.data.map(p => p.rel == "user" ? {
-            nationality: p.location ? p.location.country.code.split("/")[0] : null,
+            nationality: p.location ? p.location.country.code.replace("/","-") : null,
             name: p.names ? p.names.international : "NAME_ERROR",
             colors: p.names ? (p['name-style'].style == "solid" ? [
                 p['name-style'].color.dark,
@@ -139,7 +139,8 @@ function player_name(player) {
         let color = i == 0 ? player.colors[0] : i == player.name.length - 1 ? player.colors[1] : grad[i + 1];
         return `<span style="color:#${color};${player.guest ? "font-style:italic" : ''}">${c}</span>`
     });
-    return `<span class="name">${player.nationality ? `<img src="https://flagcdn.com/256x192/${player.nationality}.png" style="display:inline;height:0.8em;" /> ` : ''}${chars.join("")}</span>`
+    // fix for québec
+    return `<span class="name">${player.nationality ? `<img src="${player.nationality == "ca-qc" ? "qc.png" : `https://flagcdn.com/256x192/${player.nationality}.png`}" style="display:inline;height:0.8em;" /> ` : ''}${chars.join("")}</span>`
 }
 
 
@@ -162,7 +163,7 @@ async function main(game) {
     })();
     for(let i of runs) {
         document.querySelector(".container_inner").innerHTML += `<div class="run" style="visibility:hidden;color:${
-            i.condition == "duplicate" ? "#f66" : i.condition == "obsolete" ? "#ff6" : "#fff"
+            i.condition == "duplicate" ? "#fd6" : i.condition == "obsolete" ? "#f77" : "#fff"
         }">${
             i.category.il ? "[IL] " : ''
         }${
@@ -183,11 +184,11 @@ async function main(game) {
     let has_dupes = runs.map(x=>x.condition).includes("duplicate");
     let has_obsoletes = runs.map(x=>x.condition).includes("obsolete");
     document.querySelector(".container_header").innerHTML = `${
-        has_obsoletes ? "<span style='color:#ff6'>Obsoletes</span>" : ''
+        has_obsoletes ? "<span style='color:#f77'>Obsoletes</span>" : ''
     }${
         has_obsoletes && has_dupes ? ", " : ""
     }${
-        has_dupes ? "<span style='color:#f66'>Duplicates</span>" : ''
+        has_dupes ? "<span style='color:#fd6'>Duplicates</span>" : ''
     }`
     let run_elements = document.querySelectorAll(".run");
     let i = 0;
